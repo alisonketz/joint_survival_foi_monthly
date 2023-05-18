@@ -20,20 +20,20 @@ nT_period_presurv <- floor(as.duration(ymd("1994-05-15") %--% ymd("2017-01-07"))
 ###
 
 #left_period - left_age
-sus_age2date <- d_fit_sus$emonth - d_fit_sus$left_age_month + nT_period_presurv
-icap_cens_age2date <- d_fit_icap_cens$emonth - d_fit_icap_cens$left_age_month + nT_period_presurv
-icap_mort_age2date <- d_fit_icap_mort$emonth - d_fit_icap_mort$left_age_month + nT_period_presurv
-idead_age2date <- d_fit_idead$emonth - d_fit_idead$left_age_month + nT_period_presurv
-rec_neg_cens_posttest_age2date <- d_fit_rec_neg_cens_posttest$emonth - d_fit_rec_neg_cens_posttest$left_age_month + nT_period_presurv
-rec_neg_cens_postno_age2date <- d_fit_rec_neg_cens_postno$emonth - d_fit_rec_neg_cens_postno$left_age_month + nT_period_presurv
-rec_neg_mort_age2date <- d_fit_rec_neg_mort$emonth - d_fit_rec_neg_mort$left_age_month + nT_period_presurv
-rec_pos_cens_age2date <- d_fit_rec_pos_cens$emonth - d_fit_rec_pos_cens$left_age_month + nT_period_presurv
-rec_pos_mort_age2date <- d_fit_rec_pos_mort$emonth - d_fit_rec_pos_mort$left_age_month + nT_period_presurv
-sus_cens_postno_age2date <- d_fit_sus_cens_postno$emonth - d_fit_sus_cens_postno$left_age_month + nT_period_presurv
-sus_cens_posttest_age2date <- d_fit_sus_cens_posttest$emonth - d_fit_sus_cens_posttest$left_age_month + nT_period_presurv
-sus_mort_posttest_age2date <- d_fit_sus_mort_posttest$emonth - d_fit_sus_mort_posttest$left_age_month + nT_period_presurv
-sus_mort_postno_age2date <- d_fit_sus_mort_postno$emonth - d_fit_sus_mort_postno$left_age_month + nT_period_presurv
-endlive_age2date <- d_fit_endlive$emonth - d_fit_endlive$left_age_month + nT_period_presurv
+sus_age2date <- d_fit_sus$emonth - d_fit_sus$left_age_month 
+icap_cens_age2date <- d_fit_icap_cens$emonth - d_fit_icap_cens$left_age_month 
+icap_mort_age2date <- d_fit_icap_mort$emonth - d_fit_icap_mort$left_age_month 
+idead_age2date <- d_fit_idead$emonth - d_fit_idead$left_age_month 
+rec_neg_cens_posttest_age2date <- d_fit_rec_neg_cens_posttest$emonth - d_fit_rec_neg_cens_posttest$left_age_month 
+rec_neg_cens_postno_age2date <- d_fit_rec_neg_cens_postno$emonth - d_fit_rec_neg_cens_postno$left_age_month 
+rec_neg_mort_age2date <- d_fit_rec_neg_mort$emonth - d_fit_rec_neg_mort$left_age_month 
+rec_pos_cens_age2date <- d_fit_rec_pos_cens$emonth - d_fit_rec_pos_cens$left_age_month 
+rec_pos_mort_age2date <- d_fit_rec_pos_mort$emonth - d_fit_rec_pos_mort$left_age_month 
+sus_cens_postno_age2date <- d_fit_sus_cens_postno$emonth - d_fit_sus_cens_postno$left_age_month 
+sus_cens_posttest_age2date <- d_fit_sus_cens_posttest$emonth - d_fit_sus_cens_posttest$left_age_month 
+sus_mort_posttest_age2date <- d_fit_sus_mort_posttest$emonth - d_fit_sus_mort_posttest$left_age_month 
+sus_mort_postno_age2date <- d_fit_sus_mort_postno$emonth - d_fit_sus_mort_postno$left_age_month 
+endlive_age2date <- d_fit_endlive$emonth - d_fit_endlive$left_age_month 
 
 
 ###
