@@ -59,8 +59,8 @@ n_period_lookup_col_inf <- length(period_lookup_col_inf)
 ##############################################
 
 
-period_effect_survival <- c(rep(-6,4),#may1992-sep1992
-                            rep(c(rep(-4.5,4),rep(-6,8)),27),#sep1992 - sep2021
+period_effect_survival <- c(rep(-6,4),#may1994-sep1994
+                            rep(c(rep(-4.5,4),rep(-6,8)),27),#sep1994 - sep2021
                             rep(-4.5,5),#sep2021-jan2022
                             rep(-6,5))#jan2022-May15,2022
 length(period_effect_survival)
