@@ -45,7 +45,7 @@ n_age_lookup_col_inf <- length(age_lookup_col_inf)
 
 #repeat for longer due to the really old ass individual
 # ceiling(difftime("2002-01-01","2001-05-25",units="weeks"))
-period_lookup_col_inf <- c(rep(1,floor(as.duration( ymd("2001-05-25") %--%  ymd("2002-01-01"))/dmonths(1))+1),
+period_lookup_col_inf <- c(rep(1,floor(as.duration( ymd("1994-05-15") %--%  ymd("2002-01-01"))/dmonths(1))+1),
                         #    rep(1,tot_pre_study-round(difftime("2017-01-09","2002-01-01",units="weeks"))),
                            rep(1:20, each = 12), rep(21,5))# through the end of may 2022
 n_period_lookup_col_inf <- length(period_lookup_col_inf)
@@ -67,3 +67,4 @@ length(period_effect_survival)
 nT_overall
 
 period_effect_survival[(nT_period_presurv+1):(nT_overall)] <- NA
+length(is.na(period_effect_survival))

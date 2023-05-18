@@ -78,7 +78,7 @@ dInfHarvest <- nimble::nimbleFunction(
 			for(j in 1:(a[i]-1)) {
 				# sum up infected hazard from 1 to a-1
 				lam_inf <- lam_inf + exp(beta0_inf + age_effect_surv[j] + period_effect_surv[age2date[i] + j])
-			}			
+			}
 			
 			for(j in 1:(a[i])) {
 				# sum up foi hazard from 1  to j
@@ -103,6 +103,7 @@ dInfHarvest <- nimble::nimbleFunction(
 		#######################################
 		sumllik <- sumllik + log(lam_inf) + log(lik_temp)
 	} # End the loop for individual i
+
     returnType(double(0))
     if(log) return(sumllik) else return(exp(sumllik))    ## return log-likelihood
   })
@@ -140,31 +141,31 @@ nimble::registerDistributions(list(
 # for a user-defined distribution
 assign('dInfHarvest', dInfHarvest, envir = .GlobalEnv)
 
-# start <- Sys.time()
-# test <- dInfHarvest(
-#         x = 1,
-# 		  n_samples = nrow(d_fit_hunt_pos),
-#         a = d_fit_hunt_pos$ageweeks, #age (weeks) at harvest
-#         sex = d_fit_hunt_pos$sex,
-#         age2date = d_fit_hunt_pos$birthweek-1,
-#         beta_sex = beta_sex,
-#         beta0_sus = beta0_sus,
-#         beta0_inf = beta0_inf,
-#         age_effect_surv = age_effect_survival_test,
-#         period_effect_surv = period_effect_survival_test,
-#         f_age_foi = f_age_foi,
-#         m_age_foi = m_age_foi,
-#         age_lookup_f = age_lookup_f,
-#         age_lookup_m = age_lookup_m,
-#         period_lookup = period_lookup,
-#         f_period_foi = f_period_foi,
-#         m_period_foi = m_period_foi,
-#         space = rep(0,nrow(d_fit_hunt_pos)),
-# 		  sect = sect_hunt_pos,
-#         log = TRUE
-#         )
-# (end<- Sys.time()-start)
-# test
+start <- Sys.time()
+test <- dInfHarvest(
+        x = 1,
+		n_samples = nrow(d_fit_hunt_pos),
+        a = d_fit_hunt_pos$agemonths, #age (weeks) at harvest
+        sex = d_fit_hunt_pos$sex,
+        age2date = d_fit_hunt_pos$birthmonth-1,
+        beta_sex = beta_sex,
+        beta0_sus = beta0_sus,
+        beta0_inf = beta0_inf,
+        age_effect_surv = age_effect_survival_test,
+        period_effect_surv = period_effect_survival_test,
+        f_age_foi = f_age_foi,
+        m_age_foi = m_age_foi,
+        age_lookup_f = age_lookup_f,
+        age_lookup_m = age_lookup_m,
+        period_lookup = period_lookup,
+        f_period_foi = f_period_foi,
+        m_period_foi = m_period_foi,
+        space = rep(0,nrow(d_fit_hunt_pos)),
+		sect = sect_hunt_pos,
+        log = TRUE
+        )
+(end<- Sys.time()-start)
+test
 
 
 #######################################################################

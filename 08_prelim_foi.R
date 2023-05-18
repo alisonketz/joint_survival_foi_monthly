@@ -150,11 +150,11 @@ birth_start <- min(cwd_df$birth_date)
 death_end <- max(d_mort$mortdate)
 cwd_df$birthmonth <-(lubridate::interval(birth_start,cwd_df$birth_date) %/% months(1)) + 1
 # study_start_foi <- head(sort(cwd_df$kill_date),1)
-study_start_foi <- "1994-01-01"
+study_start_foi <- "1994-05-15"
 
 cwd_df$monthkill <- (lubridate::interval(study_start_foi,cwd_df$kill_date) %/% months(1)) + 1
 cwd_df$yearkill <- cwd_df$kill_year - year(study_start_foi) + 1
-pre_study_months <-(lubridate::interval(birth_start,study_start_foi) %/% months(1))+1
+pre_study_months <-(lubridate::interval(birth_start,"2002-03-01") %/% months(1))+1
 period_lookup <- sort(rep(unique(cwd_df$yearkill), 12))
 #removing months in the lookup vector beyond the month in Feb 2022 with the last date
 rm_indx <- 12-interval("2022-01-01",death_end) %/% months(1)

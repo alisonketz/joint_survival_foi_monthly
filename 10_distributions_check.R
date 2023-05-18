@@ -205,13 +205,13 @@ beta0_inf <- -3.2
 # floor(as.duration(ymd("2022-01-01") %--% ymd("2022-05-31"))/dweeks(1)) - 1
 
 period_effect_survival_test <- c(
-    rep(-6, 15), # may1992-sep1992
-    rep(c(rep(-4.5, 18), rep(-6, 34)), 29), # sep1992 - sep2021
-    rep(-4.5, 19), # sep2021-jan2022
-    rep(-6, 20)
+    rep(-6, 4), # may1992-sep1992
+    rep(c(rep(-4.5, 4), rep(-6, 8)), 29), # sep1992 - sep2021
+    rep(-4.5, 5), # sep2021-jan2022
+    rep(-6, 4)
 ) # jan2022-May15,2022
 
-age_effect_survival_test <- exp(-.01 * seq(1:962))
+age_effect_survival_test <- exp(-.01 * seq(1:nT_age_surv))
 age_effect_survival_test <- age_effect_survival_test - mean(age_effect_survival_test)
 beta_sex <- -.5
 
@@ -233,3 +233,6 @@ load("datafiles/f_age_foi.Rdata")
 load("datafiles/m_age_foi.Rdata")
 load("datafiles/f_period_foi.Rdata")
 load("datafiles/m_period_foi.Rdata")
+
+f_period_foi <- c(rep(f_period_foi[1],7),f_period_foi)
+m_period_foi <- c(rep(m_period_foi[1],7),m_period_foi)
