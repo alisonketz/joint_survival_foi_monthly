@@ -163,7 +163,7 @@ period_lookup <- c(rep(1, pre_study_months), period_lookup)
 period_lookup_hunt <- period_lookup
 n_period <- max(period_lookup)
 n_period_lookup <- length(period_lookup)
-n_age_lookup <- length(age_lookup)
+n_age_lookup <- length(age_lookup_f)
 period_lookup_hunt <- period_lookup
 n_period_lookup_hunt <- length(period_lookup_hunt)
 
