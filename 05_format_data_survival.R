@@ -228,9 +228,9 @@ d_surv$right_age_r[fix_fast_mortalities_nonneonate_indx] <- d_surv$left_age_e[fi
 ##################################################
 
 censor_fix_low <- c(6817,6876,5153)
-d_surv[d_surv$lowtag == 6817,]
-d_surv[d_surv$lowtag == 6876,]
-d_surv[d_surv$lowtag == 5153,]
+# d_surv[d_surv$lowtag == 6817,]
+# d_surv[d_surv$lowtag == 6876,]
+# d_surv[d_surv$lowtag == 5153,]
 
 #these should have the recap ageweek and period week set to 0,
 d_surv$ageweek_recap[d_surv$lowtag %in% censor_fix_low] <- 0
@@ -262,6 +262,22 @@ low_remove_fast_cens <- c(5052, 6400, 6081, 5257, 7113, 7787)
 d_surv <- d_surv[!(d_surv$lowtag %in% low_remove_fast_cens),]
 n_surv <- nrow(d_surv)
 
+##################################################
+###
+### removing the deer that were VERY fast
+### right censors for monthly data. i.e., lost collars within
+### first month after capture, these don't contribute
+### any information to estimate the effects
+###
+### 5052 6400 6081 5257 7113 7787
+###
+##################################################
+
+low_remove_fast_cens_month <- d_surv$lowtag[d_surv$emonth==d_surv$rmonth & d_surv$censored==1]
+
+d_surv <- d_surv[!(d_surv$lowtag %in% low_remove_fast_cens_month),]
+n_surv <- nrow(d_surv)
+
 ##########################################################################
 ###
 ### calibrating collar study time with start of harvest study time
@@ -273,13 +289,13 @@ n_surv <- nrow(d_surv)
 
 #the first birth is in 1992
 # weekly calculation
-nT_period_overall <- floor(as.duration(ymd("1992-05-15") %--% ymd("2022-05-15"))/dweeks(1)) - 1
-nT_period_precollar <- floor(as.duration(ymd("1992-05-15") %--% ymd("2017-01-07"))/dweeks(1)) - 1
+nT_period_overall <- floor(as.duration(ymd("1994-05-15") %--% ymd("2022-05-15"))/dweeks(1)) - 1
+nT_period_precollar <- floor(as.duration(ymd("1994-05-15") %--% ymd("2017-01-07"))/dweeks(1)) - 1
 nT_period_collar <- nT_period_overall - nT_period_precollar
 
 # monthly calculation of constants
-nT_period_overall_m <- floor(as.duration(ymd("1992-05-15") %--% ymd("2022-05-15"))/dmonths(1)) - 1
-nT_period_precollar_m <- floor(as.duration(ymd("1992-05-15") %--% ymd("2017-01-07"))/dmonths(1)) - 1
+nT_period_overall_m <- floor(as.duration(ymd("1994-05-15") %--% ymd("2022-05-15"))/dmonths(1)) - 1
+nT_period_precollar_m <- floor(as.duration(ymd("1994-05-15") %--% ymd("2017-01-07"))/dmonths(1)) - 1
 nT_period_collar_m <- nT_period_overall_m - nT_period_precollar_m
 
 #recalibrating periods of collar data
