@@ -111,3 +111,8 @@ cwd_df$agemonths[cwd_df$agemonths > 78 & cwd_df$sex == 0] <- 78#max(male6$agemon
 
 cwd_df$age_num[cwd_df$age_num == 9 & cwd_df$sex == 0] <- 6
 ageclass <- as.numeric(levels(as.factor(cwd_df$age_num)))
+
+
+#fixing the 7 fawns with agemonths==1
+cwd_df$agemonths[cwd_df$agemonths==1] <- 2
+
