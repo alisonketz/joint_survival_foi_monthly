@@ -1,0 +1,11 @@
+Rmodel:
+Time difference of 2.552419 mins
+
+Compile Rmodel:
+Time difference of 2.28504 mins
+
+Compile MCMC:
+Time difference of 1.285135 mins
+
+Run MCMC 1000 iter:
+Time difference of 150.2031 mins
