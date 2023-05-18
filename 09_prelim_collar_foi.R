@@ -14,15 +14,15 @@
 ###
 ##########################################
 
-age_lookup_col <- c(age_lookup,rep(n_age,max(d_surv$right_age_s,na.rm=TRUE) - n_age_lookup))
+age_lookup_col <- c(age_lookup_f,rep(n_age,max(d_surv$right_age_smonth,na.rm=TRUE) - n_age_lookup))
 age_lookup_col_f <- age_lookup_col
 age_lookup_col_m <- age_lookup_col
 age_lookup_col_m[age_lookup_col == 7] <- 6
 
 n_age_lookup_col <- length(age_lookup_col)
-period_lookup_col <- c(rep(16:20, each=52), rep(21,as.numeric(ceiling(difftime(death_end,"2022-01-01",units="weeks")))))#January 2017 - May 2022
+period_lookup_col <- c(rep(16:20, each=12), rep(21,floor(as.duration( ymd("2022-01-01") %--% death_end)/dmonths(1))+1))
+#January 2017 - May 2022
 n_period_lookup_col <- length(period_lookup_col)
-
 ##########################################
 ###
 ### age class indexing and period indexing
@@ -45,9 +45,9 @@ n_age_lookup_col_inf <- length(age_lookup_col_inf)
 
 #repeat for longer due to the really old ass individual
 # ceiling(difftime("2002-01-01","2001-05-25",units="weeks"))
-period_lookup_col_inf <- c(rep(1,ceiling(difftime("2002-01-01","2001-05-25",units="weeks"))),
+period_lookup_col_inf <- c(rep(1,floor(as.duration( ymd("2001-05-25") %--%  ymd("2002-01-01"))/dmonths(1))+1),
                         #    rep(1,tot_pre_study-round(difftime("2017-01-09","2002-01-01",units="weeks"))),
-                           rep(1:20, each = 52), rep(21,22))# through the end of may 2022
+                           rep(1:20, each = 12), rep(21,5))# through the end of may 2022
 n_period_lookup_col_inf <- length(period_lookup_col_inf)
 
 
@@ -59,10 +59,10 @@ n_period_lookup_col_inf <- length(period_lookup_col_inf)
 ##############################################
 
 
-period_effect_survival <- c(rep(-6,15),#may1992-sep1992
-                            rep(c(rep(-4.5,18),rep(-6,34)),29),#sep1992 - sep2021
-                            rep(-4.5,19),#sep2021-jan2022
-                            rep(-6,22))#jan2022-May15,2022
+period_effect_survival <- c(rep(-6,4),#may1992-sep1992
+                            rep(c(rep(-4.5,4),rep(-6,8)),27),#sep1992 - sep2021
+                            rep(-4.5,5),#sep2021-jan2022
+                            rep(-6,5))#jan2022-May15,2022
 length(period_effect_survival)
 nT_overall
 
