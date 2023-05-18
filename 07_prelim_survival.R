@@ -11,8 +11,8 @@
 # floor(as.duration(ymd("2017-01-07") %--% ymd("2022-05-08"))/dweeks(1))
 
 #if we go from the first birth in 1992
-nT_overall <- floor(as.duration(ymd("1992-05-15") %--% ymd("2022-05-15"))/dweeks(1)) - 1
-nT_period_presurv <- floor(as.duration(ymd("1992-05-15") %--% ymd("2017-01-07"))/dweeks(1)) - 1
+nT_overall <- floor(as.duration(ymd("1994-05-15") %--% ymd("2022-05-15"))/dmonths(1)) - 1
+nT_period_presurv <- floor(as.duration(ymd("1994-05-15") %--% ymd("2017-01-07"))/dmonths(1)) - 1
 
 ###
 ### calibrating age of deer with the study time for indexing
@@ -40,7 +40,9 @@ endlive_age2date <- d_fit_endlive$left_period_e - d_fit_endlive$left_age_e + nT_
 ### Number of age effects and number of period effects
 ###
 
-nT_age_surv <- max(d_surv$right_age_s, na.rm = TRUE) - 1
+# nT_age_surv <- max(d_surv$right_age_s, na.rm = TRUE) - 1
+nT_age_surv <- max(d_surv$right_age_smonth, na.rm = TRUE) - 1
+
 # nT_period_surv <- max(d_surv$right_period_s, na.rm = TRUE) - 1
 # nT_period_surv <- max(d_surv$right_period_s, na.rm = TRUE)
 
@@ -55,7 +57,7 @@ nT_period_surv <- nT_overall - nT_period_presurv
 ###############################
 
 quant_age <- .05
-knots_age <- unique(c(1,round(quantile(d_fit_sus$right_age_r,c(seq(quant_age,.99, by=quant_age),.99)))))
+knots_age <- unique(c(1,round(quantile(d_fit_sus$right_age_rmonth,c(seq(quant_age,.99, by=quant_age),.99)))))
 nknots_age <- length(knots_age)
 splinebasis <- ns(1:nT_age_surv, knots = knots_age)#,intercept=TRUE,
 constr_sumzero <- matrix(1, 1, nrow(splinebasis)) %*% splinebasis

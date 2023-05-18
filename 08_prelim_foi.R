@@ -33,9 +33,9 @@
 # ageclass_num <- 1:length(unique(cwd_df$age))
 # age_lookupw <- c()
 # for (j in 1:4) {
-#   age_lookupw <- c(age_lookupw, rep(ageclass_num[j], 52))
+#   age_lookupw <- c(age_lookupw, rep(ageclass_num[j], 12))
 # }
-# age_lookupw <- c(age_lookupw, rep(ageclass_num[j + 1], 2 * 52))
+# age_lookupw <- c(age_lookupw, rep(ageclass_num[j + 1], 2 * 12))
 # age_lookupw <- c(age_lookupw, rep(ageclass_num[j + 2], 3 * 52 - 1))
 # remain <- max(cwd_df$ageweeks) - length(age_lookupw)
 # age_lookupw <- c(age_lookupw, rep(ageclass_num[j + 3], remain))
@@ -279,34 +279,71 @@ s2 <- 1
 #length(age_week_indx) w/o 9+ age class is 462
 #maximum age in weeks from survival models is 962
 
-age_week_indx <- c(rep(1,52),#fawns
-                   rep(2,52),#1
-                   rep(3,52),#2
-                   rep(4,52),#3
-                   rep(5, 52 * 2),#4-5
-                   rep(6, 52 * 3),#6-8
-                   rep(7,nT_age_surv-length(c(rep(1,52),#fawns
-                                        rep(2,52),#1
-                   rep(3,52),#2
-                   rep(4,52),#3
-                   rep(5, 52 * 2),#4-5
-                   rep(6, 52 * 3)))))
+# age_week_indx <- c(rep(1,52),#fawns
+#                    rep(2,52),#1
+#                    rep(3,52),#2
+#                    rep(4,52),#3
+#                    rep(5, 52 * 2),#4-5
+#                    rep(6, 52 * 3),#6-8
+#                    rep(7,nT_age_surv-length(c(rep(1,52),#fawns
+#                                         rep(2,52),#1
+#                    rep(3,52),#2
+#                    rep(4,52),#3
+#                    rep(5, 52 * 2),#4-5
+#                    rep(6, 52 * 3)))))
+# # length(age_week_indx)
+# # max(inf_nT_age_surv)
+
+# period_week_indx <- c(rep(1,51),#2017
+#                    rep(2,52),#2018
+#                    rep(3,52),#2019
+#                    rep(4,52),#2020
+#                    rep(5,52),#2021
+#                    rep(6,nT_period - length(c(rep(1,51),#2017
+#                                               rep(2,52),#2018
+#                                               rep(3,52),#2019
+#                                               rep(4,52),#2020
+#                                               rep(5,52))))#2022
+#                    )
+
+# period_week_indx_col <- period_week_indx + 25
+
+
+
+
 # length(age_week_indx)
 # max(inf_nT_age_surv)
 
-period_week_indx <- c(rep(1,51),#2017
-                   rep(2,52),#2018
-                   rep(3,52),#2019
-                   rep(4,52),#2020
-                   rep(5,52),#2021
-                   rep(6,nT_period - length(c(rep(1,51),#2017
-                                              rep(2,52),#2018
-                                              rep(3,52),#2019
-                                              rep(4,52),#2020
-                                              rep(5,52))))#2022
+age_month_indx <- c(rep(1,12),#fawns
+                   rep(2,12),#1
+                   rep(3,12),#2
+                   rep(4,12),#3
+                   rep(5, 12 * 2),#4-5
+                   rep(6, 12 * 3),#6-8
+                   rep(7,nT_age_surv-length(c(rep(1,12),#fawns
+                                        rep(2,12),#1
+                   rep(3,12),#2
+                   rep(4,12),#3
+                   rep(5, 12 * 2),#4-5
+                   rep(6, 12 * 3)))))
+# length(age_week_indx)
+# max(inf_nT_age_surv)
+
+period_month_indx <- c(rep(1,12),#2017
+                   rep(2,12),#2018
+                   rep(3,12),#2019
+                   rep(4,12),#2020
+                   rep(5,12),#2021
+                   rep(6,nT_period_surv - length(c(rep(1,12),#2017
+                                              rep(2,12),#2018
+                                              rep(3,12),#2019
+                                              rep(4,12),#2020
+                                              rep(5,12))))#2022
                    )
 
-period_week_indx_col <- period_week_indx + 25
+period_month_indx_col <- period_month_indx + 5
+
+
 
 
 ###########################################################################
@@ -320,8 +357,8 @@ period_week_indx_col <- period_week_indx + 25
 #######################
 
 load("~/Documents/Transmission/Transmission_v3/27_urw2_bym2_timeRW1_2021/fit_sum.Rdata")
-m_age <- fit_sum[grep("m_age",rownames(fit_sum)),1][1:n_age]
-f_age <- fit_sum[grep("f_age",rownames(fit_sum)),1][1:n_age]
+m_age <- fit_sum[grep("m_age",rownames(fit_sum)),1][1:n_agem]
+f_age <- fit_sum[grep("f_age",rownames(fit_sum)),1][1:n_agef]
 f_period <- fit_sum[grep("f_time",rownames(fit_sum)),1]
 m_period <- fit_sum[grep("m_time",rownames(fit_sum)),1]
 
@@ -350,9 +387,23 @@ d_fit_icap_mort$birth_week <- birth_week_icap - min(birth_week_icap) + 1
 
 birth_start_icap <- "2001-06-15"
 pre_study_weeks_icap <-(lubridate::interval(birth_start_icap,"2002-03-02") %/% weeks(1)) + 1
-period_lookup_icap <- rep(1:21, each=52)
+period_lookup_icap <- rep(1:21, each=12)
 period_lookup_icap <- c(rep(1, pre_study_weeks_icap), period_lookup_icap)
 n_period_lookup_icap <- length(period_lookup_icap)
+
+
+
+birth_month_icap <- d_fit_icap_mort$emonth - d_fit_icap_mort$left_age_month
+d_fit_icap_mort$birth_month <- birth_month_icap - min(birth_month_icap) + 1
+
+birth_start_icap <- "2001-06-15"
+pre_study_months_icap <-(lubridate::interval(birth_start_icap,"2002-03-02") %/% months(1)) + 1
+period_lookup_icap <- rep(1:21, each=12)
+period_lookup_icap <- c(rep(1, pre_study_months_icap), period_lookup_icap)
+n_period_lookup_icap <- length(period_lookup_icap)
+
+
+
 
 ##############################################################
 ### separate the icap data for data augmentation 
